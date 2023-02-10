@@ -1,0 +1,30 @@
+[root@ip-172-31-24-143 ~]# cd kubernetes-training
+[root@ip-172-31-24-143 kubernetes-training]# ls
+00installation.md            05-services                09-deployments           16-dashboard           installation-multi-node-master.md
+01-Getting-started           05-services.md             10 Stateful Set          16-dashboard-setup.md  Istio-setup.md
+01gettingstartedWithKube.md  06-storage                 11-RBAC                  Deployments.md         Kubernetes-slides
+03-Pods                      06-volumes.md              12-cluster-admintration  heapster.md            kubernetes-troubleshooting.md
+03-pods.md                   07-configmap.md            13-networking            helm                   prometheus-setup.md
+04-controllers               07-configmaps-and-secrets  14-security              history.txt            README.md
+04-controllers.md            08-metadata                15-calico                ingress.md             Working with MiniKube.md
+[root@ip-172-31-24-143 kubernetes-training]# cd 09-deployments
+[root@ip-172-31-24-143 09-deployments]# kubectl apply -f kubia-deployment-and-service-v1.yaml
+deployment.apps/kubia created
+service/kubia created
+[root@ip-172-31-24-143 09-deployments]# kubectl explain deploy.spec.minReadySeconds
+KIND:     Deployment
+VERSION:  apps/v1
+
+FIELD:    minReadySeconds <integer>
+
+DESCRIPTION:
+     Minimum number of seconds for which a newly created pod should be ready
+     without any of its container crashing, for it to be considered available.
+     Defaults to 0 (pod will be considered available as soon as it is ready)
+[root@ip-172-31-24-143 09-deployments]# kubectl patch deployment kubia -p '{"spec": {"minReadySeconds": 10}}'
+deployment.apps/kubia patched
+[root@ip-172-31-24-143 09-deployments]# kubectl set image deployment kubia nodejs=luksa/kubia:v2
+deployment.apps/kubia image updated
+[root@ip-172-31-24-143 09-deployments]# ^C
+[root@ip-172-31-24-143 09-deployments]#
+
