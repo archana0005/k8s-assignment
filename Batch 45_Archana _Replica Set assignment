@@ -1,0 +1,5 @@
+Write a common use-case, where you will use a daemon set instead of replica set.
+
+Daemon set is very useful for configuration management.
+If we use a replica set, all of the pods will run in one node, and there is a risk of missing some nodes, which will cause a problem with report generation.
+In the Daemon set, unnecessarily, a pod will not be created; first, it will check whether a label is assigned to the nodes or not. The daemon set will allocate the pods to the nodes based on the labels assigned to the nodes, if the labels match, then only a pod will be crated for that node.
