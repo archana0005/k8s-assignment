@@ -1,0 +1,7 @@
+You have deployed an application, that is listening at port 8000. You used a replica-set to deploy it and created a NodePort service to make it accessible. But when you test it, somehow the application is not reachable at the port. Write down your approach and sequentially all the steps that you will take to find out the issue
+
+Log in to the master node.
+Assign the port to the node (Public IP)
+Edit the nodeport in vi kubia-svc-nodeport.yaml and specify the port
+Run kubectl apply -f kubia-svc-nodeport.yaml to get the nodeport ip
+Check the nodeport running using curl CLUSTER IP:port
